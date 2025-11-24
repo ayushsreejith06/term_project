@@ -1,11 +1,9 @@
 
 #include <stdlib.h>
+#include <iostream>
 using namespace std;
 
 void cleanStandardInputStreamm(void);
-
-
-
 
 void cleanStandardInputStream(void) 
 {
@@ -13,7 +11,7 @@ void cleanStandardInputStream(void)
     do 
     {
         leftover = cin.get();
-    } while (leftover != '\n' && leftover != EOF)
+    } while (leftover != '\n' && leftover != EOF);
 }
 
 

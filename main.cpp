@@ -15,3 +15,8 @@ void cleanStandardInputStream(void)
 }
 
 
+void pressEnter()
+{
+    cout << "\n<<<Press Return to continue";
+
+}

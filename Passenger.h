@@ -1,16 +1,27 @@
 // Passenger.h
 
+
+#ifndef Passenger_h
+#define Passenger_h
 #include <string>
+#include "seat.h"
 using namespace std;
+
 class Passenger {
 public:
-	Passenger();
+	Passenger(string f_name, string l_name, string phone_num): first_name(f_name), last_name(l_name), phone_number(phone_num), seat(nullptr) {}
 	string get_first_name()const{ return first_name;}
 	string get_last_name()const{ return last_name;}
 	string get_phone_number()const{ return phone_number;}
+	const Seat* get_seat()const {return seat;}
+	void set_seat(Seat& s) {seat = &s;}
+	
 	
 private:
 	string first_name;
 	string last_name;
 	string phone_number;
+	Seat* seat;
 };
+
+#endif

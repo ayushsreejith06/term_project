@@ -14,25 +14,30 @@ using namespace std;
 
 class Flight {
 public:
-    Flight(int rows, int cols, string source, string dest);
+    Flight(string id, int rows, int cols, string source, string dest);
     int get_number_of_rows()const { return number_of_rows;}
     int get_number_of_seats_per_row()const { return number_of_seats_per_row;}
 
-    void addPassenger(string f_name, string l_name, string phone_num, int row_num, char seat_char);
+    void addPassenger(Passenger* passenger, int row_num, char seat_char);
     void remove_passenger(int row_num, char seat_char);
-    vector<vector<Seat>> get_seats()const { return seats;}
-    vector<Passenger> get_passengers()const { return passengers;}
-    string get_route()const;
+    const Seat* get_seat(int row_num, char seat_char)const { return &seats.at(row_num).at(seat_char - 'A');}
+    const Passenger* get_passenger(int i)const { return passengers.at(i);}
+    const Route& get_route()const { return route;}
+    string get_id()const { return id;}
+    void show_seat_map()const;
+    void print_passenger_info()const;
+    int get_number_of_passengers()const { return passengers.size();}
     
 
 
 
 private:
     vector<vector<Seat>> seats;
-    vector<Passenger> passengers;
+    vector<Passenger*> passengers;
     int number_of_rows;
     int number_of_seats_per_row;
     Route route;
+    string id;
 
 };
 

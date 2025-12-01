@@ -1,5 +1,5 @@
 /*
- * File Name: Seat.h
+ * File Name: seat.h
  * Assignment: Term Project
  * Lab section: B01
  * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith

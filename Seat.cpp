@@ -1,5 +1,5 @@
 /*
- * File Name: Seat.cpp
+ * File Name: seat.cpp
  * Assignment: Term Project
  * Lab section: B01
  * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith

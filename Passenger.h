@@ -1,5 +1,5 @@
 /*
- * File Name: Passenger.h
+ * File Name: passenger.h
  * Assignment: Term Project
  * Lab section: B01
  * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith

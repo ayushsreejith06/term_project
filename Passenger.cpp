@@ -1,5 +1,5 @@
 /*
- * File Name: Passenger.cpp
+ * File Name: passenger.cpp
  * Assignment: Term Project
  * Lab section: B01
  * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith

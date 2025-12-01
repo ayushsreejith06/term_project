@@ -1,5 +1,5 @@
 /*
- * File Name: Flight.cpp
+ * File Name: flight.cpp
  * Assignment: Term Project
  * Lab section: B01
  * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith

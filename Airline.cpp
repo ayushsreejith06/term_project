@@ -1,5 +1,5 @@
 /*
- * File Name: Airline.cpp
+ * File Name: airline.cpp
  * Assignment: Term Project
  * Lab section: B01
  * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith

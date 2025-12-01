@@ -1,5 +1,5 @@
 /*
- * File Name: Flight.h
+ * File Name: flight.h
  * Assignment: Term Project
  * Lab section: B01
  * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith

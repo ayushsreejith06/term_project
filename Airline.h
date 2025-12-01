@@ -8,7 +8,7 @@
 
 #ifndef Airline_h
 #define Airline_h
-#include "Flight.h"
+#include "flight.h"
 #include <string>
 
 

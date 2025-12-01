@@ -11,11 +11,11 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include "Flight.h"
-#include "Airline.h"
-#include "Seat.h"
-#include "Passenger.h"
-#include "Route.h"
+#include "flight.h"
+#include "airline.h"
+#include "seat.h"
+#include "passenger.h"
+#include "route.h"
 using namespace std;
 
 void cleanStandardInputStream(void);

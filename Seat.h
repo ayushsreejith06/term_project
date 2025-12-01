@@ -8,7 +8,7 @@
 
 #ifndef Seat_h
 #define Seat_h
-#include "Passenger.h"
+#include "passenger.h"
 
 
 class Passenger;

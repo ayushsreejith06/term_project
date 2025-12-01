@@ -7,8 +7,8 @@
  */
 
 #include "Flight.h"
-#include "Seat.h"
-#include "Route.h"
+#include "seat.h"
+#include "route.h"
 #include <vector>
 #include <iostream>
 #include <string>

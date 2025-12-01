@@ -6,8 +6,8 @@
  * Submission Date: Dec 1, 2025
  */
 
-#include "Airline.h"
-#include "Flight.h"
+#include "airline.h"
+#include "flight.h"
 #include <string>
 
 

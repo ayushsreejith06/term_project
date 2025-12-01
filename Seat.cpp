@@ -7,8 +7,8 @@
  */
 
 
-#include "Seat.h"
-#include "Passenger.h"
+#include "seat.h"
+#include "passenger.h"
 
 
 

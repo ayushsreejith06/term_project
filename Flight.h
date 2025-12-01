@@ -11,9 +11,9 @@
 #define Flight_h
 
 #include <vector>
-#include "Seat.h"
-#include "Passenger.h"
-#include "Route.h"
+#include "seat.h"
+#include "passenger.h"
+#include "route.h"
 using namespace std;
 
 

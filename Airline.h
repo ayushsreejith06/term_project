@@ -1,4 +1,10 @@
-
+/*
+ * File Name: Airline.h
+ * Assignment: Term Project
+ * Lab section: B01
+ * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith
+ * Submission Date: Dec 1, 2025
+ */
 
 #ifndef Airline_h
 #define Airline_h
@@ -12,10 +18,10 @@ private:
     string name;
 
 public:
-    Airline(string n): name(n) {}
-    Flight* get_flight(int i)const { return flights.at(i);}
-    void add_flight(Flight* flight) { flights.push_back(flight);}
-    int get_num_flights()const { return flights.size();}
+    Airline(string n);
+    Flight* get_flight(int i)const;
+    void add_flight(Flight* flight);
+    int get_num_flights()const;
 };
 
 #endif

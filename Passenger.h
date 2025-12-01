@@ -1,4 +1,10 @@
-// Passenger.h
+/*
+ * File Name: Passenger.h
+ * Assignment: Term Project
+ * Lab section: B01
+ * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith
+ * Submission Date: Dec 1, 2025
+ */
 
 
 #ifndef Passenger_h
@@ -11,12 +17,12 @@ class Seat;
 
 class Passenger {
 public:
-	Passenger(string pass_id, string f_name, string l_name, string phone_num, const Seat* s): id(pass_id), first_name(f_name), last_name(l_name), phone_number(phone_num), seat(s) {}
-	string get_first_name()const{ return first_name;}
-	string get_last_name()const{ return last_name;}
-	string get_phone_number()const{ return phone_number;}
-	const Seat* get_seat()const {return seat;}
-	string get_id()const { return id;}
+	Passenger(string pass_id, string f_name, string l_name, string phone_num, const Seat* s);
+	string get_first_name()const;
+	string get_last_name()const;
+	string get_phone_number()const;
+	const Seat* get_seat()const;
+	string get_id()const;
 	
 	
 private:

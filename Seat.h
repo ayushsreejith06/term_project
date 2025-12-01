@@ -1,4 +1,10 @@
-// Seat.h
+/*
+ * File Name: Seat.h
+ * Assignment: Term Project
+ * Lab section: B01
+ * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith
+ * Submission Date: Dec 1, 2025
+ */
 
 #ifndef Seat_h
 #define Seat_h
@@ -15,14 +21,14 @@ private:
 	bool status;
 
 public:
-	Seat(int row = 0, char character = 0): row_number(row), seat_character(character), passenger(nullptr), status(false) {}
-	int get_row_number()const { return row_number;}
-	char get_seat_character()const { return seat_character;}
-	const Passenger* get_passenger()const { return passenger;}
-	bool get_status()const {return status;}
-	void set_passenger(Passenger* pass) { passenger = pass;}
-	void set_status(bool s) { status = s;}
-	void set_seat_loc(int row, int character) {row_number = row; seat_character = character;}
+	Seat(int row = 0, char character = 0);
+	int get_row_number()const;
+	char get_seat_character()const;
+	const Passenger* get_passenger()const;
+	bool get_status()const;
+	void set_passenger(Passenger* pass);
+	void set_status(bool s);
+	void set_seat_loc(int row, int character);
 
 
 };

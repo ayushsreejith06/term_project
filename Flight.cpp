@@ -1,4 +1,10 @@
-
+/*
+ * File Name: Flight.cpp
+ * Assignment: Term Project
+ * Lab section: B01
+ * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith
+ * Submission Date: Dec 1, 2025
+ */
 
 #include "Flight.h"
 #include "Seat.h"
@@ -20,6 +26,14 @@ Flight::Flight(string id, int rows, int cols, string source, string dest): numbe
         }
     }
 }
+
+int Flight::get_number_of_rows()const { return number_of_rows;}
+int Flight::get_number_of_seats_per_row()const { return number_of_seats_per_row;}
+const Seat* Flight::get_seat(int row_num, char seat_char)const { return &seats.at(row_num).at(seat_char - 'A');}
+const Passenger* Flight::get_passenger(int i)const { return passengers.at(i);}
+const Route& Flight::get_route()const { return route;}
+string Flight::get_id()const { return id;}
+int Flight::get_number_of_passengers()const { return passengers.size();}
 
 void Flight::addPassenger(Passenger* passenger, int row_num, char seat_char) {
     passengers.push_back(passenger);
@@ -46,7 +60,7 @@ void Flight::show_seat_map()const {
     string line = "   ";
     for (int j = 0; j < number_of_seats_per_row; j++) {
         line += "+---";
-        cout << "   " << (char)j + 'A';
+        cout << "   " << (char)(j + 'A');
     }
     cout << endl;
     line += '+';

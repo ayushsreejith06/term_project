@@ -1,4 +1,10 @@
-// Flight.h
+/*
+ * File Name: Flight.h
+ * Assignment: Term Project
+ * Lab section: B01
+ * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith
+ * Submission Date: Dec 1, 2025
+ */
 
 
 #ifndef Flight_h
@@ -15,18 +21,18 @@ using namespace std;
 class Flight {
 public:
     Flight(string id, int rows, int cols, string source, string dest);
-    int get_number_of_rows()const { return number_of_rows;}
-    int get_number_of_seats_per_row()const { return number_of_seats_per_row;}
+    int get_number_of_rows()const;
+    int get_number_of_seats_per_row()const;
 
     void addPassenger(Passenger* passenger, int row_num, char seat_char);
     void remove_passenger(int row_num, char seat_char);
-    const Seat* get_seat(int row_num, char seat_char)const { return &seats.at(row_num).at(seat_char - 'A');}
-    const Passenger* get_passenger(int i)const { return passengers.at(i);}
-    const Route& get_route()const { return route;}
-    string get_id()const { return id;}
+    const Seat* get_seat(int row_num, char seat_char)const;
+    const Passenger* get_passenger(int i)const;
+    const Route& get_route()const;
+    string get_id()const;
     void show_seat_map()const;
     void print_passenger_info()const;
-    int get_number_of_passengers()const { return passengers.size();}
+    int get_number_of_passengers()const;
     
 
 

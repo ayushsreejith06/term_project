@@ -1,7 +1,16 @@
+/*
+ * File Name: main.cpp
+ * Assignment: Term Project
+ * Lab section: B01
+ * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith
+ * Submission Date: Dec 1, 2025
+ */
+
 
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include "Flight.h"
 #include "Airline.h"
 #include "Seat.h"
@@ -39,17 +48,23 @@ void pressEnter()
 int menu() {
 
     int choice = -1;
+    while(choice < 1 || choice > 7) {
+        cout << "\nPlease select one of the following options:\n\n";
+        cout << "1. Select Flight\n";
+        cout << "2. Display Flight Seat Map.\n";
+        cout << "3. Display Passenger Information.\n";
+        cout << "4. Add a New Passenger\n";
+        cout << "5. Remove an Existing Passenger\n";
+        cout << "6. Save Data\n";
+        cout << "7. Quit.\n";
+        cout << "\nEnter your choice: (1, 2, 3, 4, 5, 6 or 7) ";
+        cin >> choice;
 
-    cout << "\nPlease select one of the following options:\n\n";
-    cout << "1. Select Flight\n";
-    cout << "2. Display Flight Seat Map.\n";
-    cout << "3. Display Passenger Information.\n";
-    cout << "4. Add a New Passenger\n";
-    cout << "5. Remove an Existing Passenger\n";
-    cout << "6. Save Data\n";
-    cout << "7. Quit.\n";
-    cout << "\nEnter your choice: (1, 2, 3, 4, 5, 6 or 7) ";
-    cin >> choice;
+        if (choice < 1 || choice > 7) {
+            cout << "\nERROR input out of range (1,7). Please enter a value within range" << endl;
+        }
+    }
+    
 
     cleanStandardInputStream();
     return choice;
@@ -120,8 +135,19 @@ void read_files(Airline& airline) {
 
 void add_passenger(Flight* f) {
     string id;
-    cout << endl << "Please enter the passenger id: ";
-    cin >> id;
+    bool unique = false;
+    while (!unique) {
+        cout << endl << "Please enter the passenger id: ";
+        cin >> id; 
+        unique = true;
+        for (int i = 0; i < f->get_number_of_passengers(); i++) {
+            if (f->get_passenger(i)->get_id() == id) {
+                unique = false;
+                cout << "\nERROR id is taken on this flight. Please choose a unique id.\n";
+            }
+        }
+    }
+    
     cleanStandardInputStream();
     string fname;
     cout << "Please enter the passenger first name: ";
@@ -136,47 +162,88 @@ void add_passenger(Flight* f) {
     cin >> phone;
     cleanStandardInputStream();
     int seat_row;
-    cout << "Enter the passenger's desired row: ";
-    cin >> seat_row;
-    cleanStandardInputStream();
     char seat_char;
-    cout << "Enter the passenger's desired seat: ";
-    cin >> seat_char;
-    cleanStandardInputStream();
+
+    while(true) {
+        while (true) {
+            cout << "Enter the passenger's desired row: ";
+            cin >> seat_row;
+            if (0 <= seat_row && seat_row < f->get_number_of_rows())
+                break;
+            cout << "\nERROR row is out of range (0," << (f->get_number_of_rows()-1) << "). Please choose a valid row.\n";
+        }
+        
+        cleanStandardInputStream();
+        while (true) {
+            cout << "Enter the passenger's desired seat: ";
+            cin >> seat_char;
+            if ('A' <= seat_char && seat_char < f->get_number_of_seats_per_row() + 'A')
+                break;
+
+            cout << "\nERROR seat character is out of range (A," << (char)(f->get_number_of_seats_per_row()-1+'A') << "). Please choose a valid seat.\n";
+        }
+        cleanStandardInputStream();
+
+        if (!f->get_seat(seat_row,seat_char)->get_status())
+            break;
+
+        cout << "\nERROR seat already taken. Please choose an unoccupied seat.\n";
+    }
+
+    
 
     f->addPassenger(new Passenger(id, fname, lname, phone, f->get_seat(seat_row, seat_char)), seat_row, seat_char);
 }
 
 void remove_passenger(Flight* f) {
-    string id;
-    cout << "Enter the id of the passenger that needs to be removed: ";
-    cin >> id;
-    
-    cleanStandardInputStream();
-    for (int i = 0; i < f->get_number_of_passengers(); i++) {
-        if (f->get_passenger(i)->get_id() == id) {
-            f->remove_passenger(f->get_passenger(i)->get_seat()->get_row_number(), f->get_passenger(i)->get_seat()->get_seat_character());
-            break;
+    bool try_again = true;
+    while (try_again) {
+        string id;
+        cout << "Enter the id of the passenger that needs to be removed: ";
+        cin >> id;
+        
+        cleanStandardInputStream();
+
+        for (int i = 0; i < f->get_number_of_passengers(); i++) {
+            if (f->get_passenger(i)->get_id() == id) {
+                f->remove_passenger(f->get_passenger(i)->get_seat()->get_row_number(), f->get_passenger(i)->get_seat()->get_seat_character());
+                return;
+            }
         }
+
+        char input;
+        cout << "\nERROR Passenger id doesn't exist. Do you want to try again? <Y or N>: ";
+        cin >> input;
+        try_again = input == 'Y';
+
+        cleanStandardInputStream();
     }
 }
 
 
 Flight * select_flight(Airline& a) {
-    cout << endl << "Here is the list of available flights. Please select one:" << endl;
-    for (int i = 0; i < a.get_num_flights(); i++) {
-        cout << "    " << i+1 << ".\t" << a.get_flight(i)->get_id() << '\t' << a.get_flight(i)->get_route().get_source() << '\t' << a.get_flight(i)->get_route().get_destination() << '\t' << a.get_flight(i)->get_number_of_rows() << '\t' << a.get_flight(i)->get_number_of_seats_per_row() << endl;
-    }
-    cout << "\nEnter your choice: ";
-    int i;
-    cin >> i;
-    cleanStandardInputStream();
-    i--;
-    
-    cout << "You have selected " << a.get_flight(i)->get_id() << " from " << a.get_flight(i)->get_route().get_source() << " to " << a.get_flight(i)->get_route().get_destination() << endl;
+    while (true) {
+        cout << left << endl << "Here is the list of available flights. Please select one:" << endl;
+        for (int i = 0; i < a.get_num_flights(); i++) {
+            cout << "  " << i+1 << ".  " << setw(8)  << a.get_flight(i)->get_id() << setw(10) << a.get_flight(i)->get_route().get_source() << setw(10) << a.get_flight(i)->get_route().get_destination() << setw(4) << a.get_flight(i)->get_number_of_rows() << '\t' << a.get_flight(i)->get_number_of_seats_per_row() << endl;
+        }
+        cout << "\nEnter your choice: ";
+        int i;
+        cin >> i;
+        if (1 <= i && i <= a.get_num_flights()) {
+            cleanStandardInputStream();
+            i--;
+            
+            cout << "You have selected " << a.get_flight(i)->get_id() << " from " << a.get_flight(i)->get_route().get_source() << " to " << a.get_flight(i)->get_route().get_destination() << endl;
 
-    pressEnter();
-    return a.get_flight(i);
+            pressEnter();
+            return a.get_flight(i);
+        }
+
+        cout << "\nERROR choice not in valid range (1," << a.get_num_flights() << "). Please choose a valid choice.\n";
+        
+    }
+    
 }
 
 void save_data(Airline& a) {
@@ -184,7 +251,7 @@ void save_data(Airline& a) {
     cout << "Do you want to save the data in the \"passengers.txt\"? Please answer <Y or N> ";
     cin >> in;
 
-    if (in == 'N')
+    if (in != 'Y')
         return;
 
     ofstream out_pass("passengers.txt");
@@ -211,30 +278,35 @@ int main(void) {
     displayHeader();
     Airline airline = Airline("hello");
     read_files(airline);
-    Flight* f = airline.get_flight(0);
+    Flight* f = nullptr;
     int choice = menu();
     while (choice != 7) {
-        switch (choice) {
-            case 1:
-                f = select_flight(airline);
-                break;
-            case 2:
-                f->show_seat_map();
-                pressEnter();
-                break;
-            case 3:
-                f->print_passenger_info();
-                pressEnter();
-                break;
-            case 4:
-                add_passenger(f);
-                break;
-            case 5:
-                remove_passenger(f);
-                break;
-            case 6:
-                save_data(airline);
-                break;
+        if (f == nullptr && 1 < choice && choice < 7) {
+            cout << "\nERROR No flight chosen\n";
+        }
+        else {
+            switch (choice) {
+                case 1:
+                    f = select_flight(airline);
+                    break;
+                case 2:
+                    f->show_seat_map();
+                    pressEnter();
+                    break;
+                case 3:
+                    f->print_passenger_info();
+                    pressEnter();
+                    break;
+                case 4:
+                    add_passenger(f);
+                    break;
+                case 5:
+                    remove_passenger(f);
+                    break;
+                case 6:
+                    save_data(airline);
+                    break;
+            }
         }
         choice = menu();
     }

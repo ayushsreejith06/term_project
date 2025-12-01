@@ -1,4 +1,10 @@
-
+/*
+ * File Name: Route.h
+ * Assignment: Term Project
+ * Lab section: B01
+ * Created by: Benjamin Anderson, Rolanted Ramos, Ayush Sreejith
+ * Submission Date: Dec 1, 2025
+ */
 
 #ifndef Route_h
 #define Route_h
@@ -8,9 +14,9 @@ using namespace std;
 
 class Route {
 public:
-    Route(string s, string d): source(s), destination(d) {}
-    string get_source()const { return source;}
-    string get_destination()const { return destination;}
+    Route(string s, string d);
+    string get_source()const;
+    string get_destination()const;
 
 private:
     string source;
